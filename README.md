@@ -18,12 +18,13 @@ Supported authentication methods:
 - Client certificate auth
 - Both of them
 
-| Name | Description | Required when | 
-| --- | --- | --- | 
-| `username` | Username | Username-password auth |
-| `password` | Password | Username-password auth |
-| `client_key` | Local peer's private key | Client certificate auth |
-| `tls_auth_key` | Pre-shared secret for TLS-auth HMAC signature | Optional |
+| Name           | Description                                   | Required when           | 
+|----------------|-----------------------------------------------|-------------------------| 
+| `username`     | Username                                      | Username-password auth  |
+| `password`     | Password                                      | Username-password auth  |
+| `client_key`   | Local peer's private key                      | Client certificate auth |
+| `tls_auth_key` | Pre-shared secret for TLS-auth HMAC signature | Optional                |
+| `key_password` | Local peer's private key password             | Optional                |
 
 **Note: It is strongly recommended that you provide all credentials
 via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).**
@@ -51,6 +52,7 @@ via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encry
           password: ${{ secrets.OVPN_PASSWORD }}
           client_key: ${{ secrets.OVPN_CLIENT_KEY }}
           tls_auth_key: ${{ secrets.OVPN_TLS_AUTH_KEY }}
+          key_password: ${{ secrets.OVPN_CLIENT_KEY_PASSWORD }}
       - name: Build something
         run: ./gradlew clean build
       # The openvpn process is automatically terminated in post-action phase

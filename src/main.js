@@ -9,6 +9,7 @@ const run = (callback) => {
   const password = core.getInput('password').trim()
   const clientKey = core.getInput('client_key').trim()
   const tlsAuthKey = core.getInput('tls_auth_key').trim()
+  const keyPassword = core.getInput('key_password').trim()
 
   if (!fs.existsSync(configFile)) {
     throw new Error(`config file '${configFile}' not found`)
@@ -22,6 +23,12 @@ const run = (callback) => {
   if (username && password) {
     fs.appendFileSync(configFile, 'auth-user-pass up.txt\n')
     fs.writeFileSync('up.txt', [username, password].join('\n'))
+  }
+
+  // client key's password (askpass)
+  if (keyPassword) {
+    fs.appendFileSync(configFile, 'askpass kp.txt\n')
+    fs.writeFileSync('kp.txt', keyPassword)
   }
 
   // client certificate auth

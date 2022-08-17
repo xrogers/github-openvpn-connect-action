@@ -19,6 +19,9 @@ inputs:
   client_key:
     description: "Local peer's private key"
     required: false
+  key_password:
+    description: "Local peer's private key's password (askpass)"
+    required: false
 runs:
   using: "node12"
   main: "dist/index.js"
